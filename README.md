@@ -1,25 +1,6 @@
-<p align="center">
-  <!-- LOGO PLACEHOLDER -->
-  <!-- TODO: Create a logo. Options:
-       1. Use https://www.logo.com or https://www.canva.com
-       2. Prompt Midjourney/DALL-E: "Minimalist logo for 'MentorSpec',
-          a developer mentorship tool. Icon showing a senior developer
-          guiding a junior. Clean, modern, tech aesthetic. SVG style."
-       3. Use ASCII art below as fallback -->
-</p>
-
-<h1 align="center">
-
-```
- ███╗   ███╗███████╗███╗   ██╗████████╗ ██████╗ ██████╗ ███████╗██████╗ ███████╗ ██████╗
- ████╗ ████║██╔════╝████╗  ██║╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝
- ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝███████╗██████╔╝█████╗  ██║
- ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗╚════██║██╔═══╝ ██╔══╝  ██║
- ██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████║██║     ███████╗╚██████╗
- ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝ ╚═════╝
-```
-
-</h1>
+<h5 align="center">
+  <img width="717" height="114" alt="ascii-art-text (3)" src="https://github.com/user-attachments/assets/81bf37f6-d06a-4576-be3e-579e6bd30cd9" />
+</h5>
 
 <p align="center">
   <strong>AI-Mentored Development for Juniors</strong><br>
