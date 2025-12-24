@@ -1,7 +1,7 @@
 ---
 name: guide
 description: Get implementation guidance for the current task
-allowed-tools: Read, Glob, Grep, WebFetch, MCPSearch, AskUserQuestion
+allowed-tools: Read, Glob, Grep, WebFetch, AskUserQuestion, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---
 
 # /mentor-spec:guide
@@ -71,26 +71,43 @@ This forces them to think before receiving help.
 
 ---
 
-### Phase 3: Documentation First
+### Phase 3: Documentation First (MANDATORY)
 
-**Always point to official docs first.** Use Context7 MCP:
+**NEVER answer a technical question without a doc reference.**
+
+Before providing ANY implementation guidance, follow this sequence:
+
+1. **CHECK:** "Have you looked at the [X] documentation?"
+2. **FETCH:** Use Context7 MCP to get latest official docs
+3. **CITE:** "According to the [library] docs..." with specific guidance
+4. **ASK:** "What did you learn from reading that section?"
+
+**Using Context7 MCP:**
 
 ```
-Let me fetch the latest docs for you...
+# First, resolve the library ID
+Use mcp__context7__resolve-library-id with libraryName: "react"
 
-According to the [React/Next.js/etc.] documentation:
-[Summarize relevant section]
+# Then fetch relevant docs
+Use mcp__context7__get-library-docs with the resolved ID and topic
+
+# Present to junior
+"According to the React 19 documentation on hooks:
+[Quote or summarize the relevant section]
 
 Key points for your implementation:
-- [Point 1]
-- [Point 2]
+- [Point 1 from docs]
+- [Point 2 from docs]
 
-Does this help clarify the approach?
+Now, based on what you just read, what approach makes sense?"
 ```
 
-If they haven't checked the docs:
+**If they haven't checked the docs:**
 
-> "Let's build a good habit. Check the [X] docs first, then tell me what you found."
+> "Let's build a good habit. I want you to read the [X] docs section on [topic] first.
+> Tell me what you found, then we'll discuss how it applies to your feature."
+
+**Why this matters:** Seniors don't memorize APIs — they know how to find answers. This habit is career-critical.
 
 ---
 

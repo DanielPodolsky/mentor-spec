@@ -1,0 +1,186 @@
+# Project Constitution
+
+> This document defines the coding standards, approved patterns, and conventions for this project.
+> It serves as THE SOURCE OF TRUTH for how code should be written.
+> Run `/mentor-spec:init` to customize this for your project.
+
+---
+
+## Coding Standards
+
+### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Variables | camelCase | `userName`, `isLoading` |
+| Functions | camelCase, verb-first | `getUserById()`, `handleSubmit()` |
+| Components | PascalCase | `UserProfile`, `LoginForm` |
+| Constants | SCREAMING_SNAKE | `MAX_RETRIES`, `API_BASE_URL` |
+| Files | kebab-case or match export | `user-profile.tsx` or `UserProfile.tsx` |
+
+**Why this matters:** Consistent naming makes code readable. When you see `isLoading`, you instantly know it's a boolean. When you see `handleClick`, you know it's an event handler.
+
+### Code Quality Rules
+
+1. **Single Responsibility** — Each function does ONE thing
+   - Bad: `processUserAndSendEmail()`
+   - Good: `processUser()` + `sendEmail()`
+
+2. **No Magic Numbers** — Use named constants
+   - Bad: `if (status === 2)`
+   - Good: `if (status === STATUS.ACTIVE)`
+
+3. **Descriptive Names** — Code should read like English
+   - Bad: `const d = new Date()`
+   - Good: `const createdAt = new Date()`
+
+4. **Comments Explain WHY, Not WHAT**
+   - Bad: `// increment counter` followed by `counter++`
+   - Good: `// Reset after 3 failed attempts to prevent brute force`
+
+---
+
+## Approved Libraries
+
+> These are the libraries approved for this project. Check with your mentor before adding new ones.
+
+### State Management
+- **Local state:** `useState` for component-level state
+- **Server state:** [To be defined during /init]
+- **Global state:** [To be defined during /init]
+
+**Why we choose carefully:** Every library is a dependency. Dependencies can have bugs, security issues, and become unmaintained. Choose wisely.
+
+### Forms & Validation
+- [To be defined during /init]
+
+### Styling
+- [To be defined during /init]
+
+### HTTP/API
+- [To be defined during /init]
+
+---
+
+## Architectural Patterns
+
+### File Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── pages/          # Route components (if applicable)
+├── lib/            # Business logic, utilities
+├── hooks/          # Custom React hooks
+├── types/          # TypeScript types/interfaces
+└── api/            # API routes or client
+```
+
+**Why structure matters:** When you need to find something, you should know exactly where to look. Structure is navigation.
+
+### Component Patterns
+
+1. **Separation of Concerns**
+   - UI components should NOT contain business logic
+   - Business logic lives in `lib/` or custom hooks
+
+2. **Props Down, Events Up**
+   - Data flows from parent to child via props
+   - Actions flow from child to parent via callbacks
+
+3. **Colocation**
+   - Keep related code together
+   - Component styles, tests, and types in same folder
+
+---
+
+## API Conventions
+
+### Endpoint Naming
+- Use RESTful conventions: `/api/users`, `/api/users/:id`
+- Use plural nouns: `/api/users` not `/api/user`
+- Use kebab-case for multi-word: `/api/user-profiles`
+
+### Response Format
+
+```typescript
+// Success
+{ data: T, status: 'success' }
+
+// Error
+{ error: string, code: number, status: 'error' }
+```
+
+### Error Handling
+- Always catch errors at the boundary
+- Log errors for debugging
+- Show user-friendly messages (never expose stack traces)
+
+---
+
+## Git Conventions
+
+### Branch Naming
+- `feature/[feature-name]` — New features
+- `fix/[bug-description]` — Bug fixes
+- `refactor/[what]` — Code improvements
+
+### Commit Messages
+
+Format: `type(scope): description`
+
+Types:
+- `feat` — New feature
+- `fix` — Bug fix
+- `refactor` — Code change that neither fixes nor adds
+- `docs` — Documentation only
+- `test` — Adding tests
+- `chore` — Maintenance tasks
+
+**Examples:**
+- `feat(auth): add password reset flow`
+- `fix(login): handle empty email validation`
+- `refactor(api): extract common error handling`
+
+**Why this format?** Your git log tells a story. Recruiters read it. Make it readable.
+
+---
+
+## Security Checklist
+
+Before shipping ANY feature, verify:
+
+- [ ] No secrets in code (use environment variables)
+- [ ] User input is validated and sanitized
+- [ ] Error messages don't expose sensitive data
+- [ ] Authentication/authorization is checked where needed
+
+**Why security matters:** One vulnerability can compromise everything. Security is not optional.
+
+---
+
+## Testing Standards
+
+### What to Test
+- Critical user flows (login, checkout, etc.)
+- Edge cases that could break the app
+- Complex business logic
+
+### What NOT to Over-Test
+- Simple UI that rarely changes
+- Third-party library internals
+- Implementation details (test behavior, not code)
+
+**The 80/20 rule:** 80% of bugs hide in 20% of the code. Focus tests there.
+
+---
+
+## When In Doubt
+
+1. **Check the docs** — Official documentation is the source of truth
+2. **Ask your mentor** — "I tried X, read the docs, and I think Y. Does that make sense?"
+3. **Keep it simple** — The best code is code you don't write
+
+---
+
+*This constitution evolves with the project. Update it when patterns change.*

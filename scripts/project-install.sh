@@ -194,6 +194,33 @@ cat > "$PROJECT_DIR/mentorspec/product/roadmap.md" << 'EOF'
 - [ ] Deployment
 EOF
 
+# Copy constitution template if it exists, otherwise create placeholder
+if [ -f "$BASE_DIR/core/constitution.md.template" ]; then
+    cp "$BASE_DIR/core/constitution.md.template" "$PROJECT_DIR/mentorspec/product/constitution.md"
+else
+    cat > "$PROJECT_DIR/mentorspec/product/constitution.md" << 'EOF'
+# Project Constitution
+
+> Run `/mentor-spec:init` to customize coding standards for your project.
+
+## Coding Standards
+
+<!-- Project-wide coding conventions will be defined here -->
+
+## Approved Libraries
+
+<!-- Libraries approved for this project -->
+
+## Architectural Patterns
+
+<!-- How code should be organized -->
+
+---
+
+*This constitution is THE SOURCE OF TRUTH for how code should be written.*
+EOF
+fi
+
 success "Product templates created"
 
 # ============================================================================
@@ -210,9 +237,10 @@ success "MentorSpec installed successfully!"
 echo ""
 
 info "What was created:"
-echo "  mentorspec/           — Your project docs (commit this)"
-echo "  .claude/CLAUDE.md     — THE STRICTNESS (affects all Claude interactions)"
-echo "  .claude/commands/     — Slash commands"
+echo "  mentorspec/                       — Your project docs (commit this)"
+echo "  mentorspec/product/constitution.md — Coding standards & approved patterns"
+echo "  .claude/CLAUDE.md                 — THE STRICTNESS (affects all Claude interactions)"
+echo "  .claude/commands/                 — Slash commands"
 echo ""
 
 info "Next steps:"
