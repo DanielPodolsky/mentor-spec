@@ -34,63 +34,34 @@ The implementation phase is where the junior learns by doing.
 
 ## Execution Flow
 
-### Phase 1: Feature Size Check
-
-Use AskUserQuestion to determine scope:
-
-```
-Question: "How big is this feature?"
-
-Options:
-1. Tiny (bug fix, typo, < 15 min)
-   Description: Just fix it, no spec needed
-
-2. Small (single task, < 1 hour)
-   Description: Quick discussion, then code
-
-3. Medium (2-4 hours, multiple components)
-   Description: Full spec workflow — we'll generate specs for you
-
-4. Large (> 4 hours, many components)
-   Description: Let's break this into smaller features first
-```
-
-**Based on response:**
-- **Tiny/Small:** Skip to implementation. Say: "Let's just do it. What are you building?"
-- **Medium:** Continue to Phase 2
-- **Large:** Help break down: "This is too big for one spec. Let's identify 2-3 smaller features within this."
-
----
-
-### Phase 2: Core Requirements (Minimal Input)
+### Phase 1: Core Requirements (Minimal Input)
 
 Ask only what's needed to generate specs:
 
-**2a. Feature Name:**
+**1a. Feature Name:**
 > "What are you building? Give it a short name (e.g., 'login form', 'user settings', 'dark mode')."
 
 Generate slug: `login-form`, `user-settings`, `dark-mode`
 
-**2b. One-Line Description:**
+**1b. One-Line Description:**
 > "In one sentence, what does this feature do?"
 
-**2c. User Story (Keep it simple):**
+**1c. User Story (Keep it simple):**
 > "Complete this: As a [user type], I want to [action] so that [benefit]."
 
 Push back ONLY if they skip the 'so that' part — that's the value.
 
 ---
 
-### Phase 3: AI Generates Specs (The SDD Part)
+### Phase 2: AI Generates Specs (The SDD Part)
 
 **Read the project context:**
 1. Check `mentorspec/product/mission.md` for project goals
 2. Check `mentorspec/product/stack.md` for technology constraints
-3. Check `mentorspec/product/constitution.md` for coding standards
-4. Scan existing code structure to understand patterns
+3. Scan existing code structure to understand patterns
 
 **Generate all three files based on:**
-- User's input from Phase 2
+- User's input from Phase 1
 - Project context
 - Technology stack
 - Best practices for the detected framework
@@ -99,7 +70,7 @@ Push back ONLY if they skip the 'so that' part — that's the value.
 
 ---
 
-### Phase 4: Present Specs for Review
+### Phase 3: Present Specs for Review
 
 After generating, present a summary:
 
@@ -134,7 +105,7 @@ When you're ready, run /mentor-spec:guide to start Phase 1.
 
 ---
 
-### Phase 5: Junior Review & Acceptance
+### Phase 4: Junior Review & Acceptance
 
 Use AskUserQuestion:
 
@@ -288,13 +259,10 @@ Before starting:
 > Build the skeleton. No logic yet.
 
 - [ ] Create component file(s) at correct location
-  └── Estimated: 15-20 min
 - [ ] Set up basic structure (HTML/JSX only)
   └── Depends on: Component file exists
-  └── Estimated: 15-20 min
 - [ ] Add placeholder styling
   └── Depends on: Basic structure
-  └── Estimated: 10 min
 
 **Checkpoint:** You should see the component render (empty/unstyled is fine).
 
@@ -305,13 +273,10 @@ Before starting:
 
 - [ ] [First core task]
   └── Depends on: Phase 1 complete
-  └── Estimated: 20-30 min
 - [ ] [Second core task]
   └── Depends on: [specific task]
-  └── Estimated: 20-30 min
 - [ ] [Third core task]
   └── Depends on: [specific task]
-  └── Estimated: 15-20 min
 
 **Checkpoint:** Core functionality works with happy path.
 
@@ -321,13 +286,9 @@ Before starting:
 > Handle what can go wrong.
 
 - [ ] Handle empty/invalid input
-  └── Estimated: 15 min
 - [ ] Handle network failures
-  └── Estimated: 20 min
 - [ ] Handle loading states
-  └── Estimated: 15 min
 - [ ] [Other edge cases from spec]
-  └── Estimated: varies
 
 **Checkpoint:** Feature handles errors gracefully.
 
@@ -337,13 +298,9 @@ Before starting:
 > Make it production-ready.
 
 - [ ] Add proper error messages
-  └── Estimated: 15 min
 - [ ] Add loading indicators
-  └── Estimated: 10 min
 - [ ] Final styling pass
-  └── Estimated: 20 min
 - [ ] Test against acceptance criteria
-  └── Estimated: 15 min
 
 **Checkpoint:** All acceptance criteria pass.
 
@@ -379,19 +336,3 @@ Before starting:
 5. **Out of Scope is critical** — Prevents feature creep
 6. **Use Context7** — Always fetch latest docs when generating design
 
----
-
-## If Feature Is Too Large
-
-When feature is "Large" (>4 hours), help break it down:
-
-> "This feature is too big for one spec. Let's break it into smaller pieces.
->
-> Looking at [feature], I see these potential sub-features:
-> 1. [Sub-feature 1] — [scope]
-> 2. [Sub-feature 2] — [scope]
-> 3. [Sub-feature 3] — [scope]
->
-> Which one should we spec first?"
-
-Then run `/mentor-spec:feature` for each sub-feature separately.

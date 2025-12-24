@@ -1,7 +1,7 @@
 ---
 name: init
 description: Initialize MentorSpec project with mission, stack, and roadmap
-allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash
+allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---
 
 # /mentor-spec:init
@@ -26,6 +26,31 @@ These questions force THINKING, not feature-listing. Most juniors skip straight 
 ---
 
 ## Execution Flow
+
+### Phase 0: Context7 Check
+
+Before anything else, check if Context7 MCP is available:
+
+1. **Check for Context7:** Try to use `mcp__context7__resolve-library-id` silently
+2. **If NOT available:** Show this message:
+
+```
+⚠️ Context7 MCP not detected.
+
+MentorSpec uses Context7 to fetch official documentation for any library.
+This ensures you always learn from up-to-date, official sources.
+
+To install (takes 30 seconds):
+  claude mcp add --transport http context7 https://mcp.context7.com/mcp
+
+After installing, restart Claude Code and run /mentor-spec:init again.
+
+📖 Full setup guide: mentorspec/guides/context7-setup.md
+```
+
+3. **If available:** Continue silently to Phase 1.
+
+---
 
 ### Phase 1: Detection (Silent)
 
