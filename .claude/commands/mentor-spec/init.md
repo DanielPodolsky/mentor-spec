@@ -1,7 +1,7 @@
 ---
 name: init
 description: Initialize MentorSpec project with mission, stack, and roadmap
-allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
+allowed-tools: Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__octocode__githubSearchRepositories, mcp__octocode__githubViewRepoStructure
 ---
 
 # /mentor-spec:init
@@ -27,23 +27,25 @@ These questions force THINKING, not feature-listing. Most juniors skip straight 
 
 ## Execution Flow
 
-### Phase 0: Context7 Check
+### Phase 0: MCP Check
 
-Before anything else, check if Context7 MCP is available:
+Before anything else, verify MCPs are available:
 
 1. **Check for Context7:** Try to use `mcp__context7__resolve-library-id` silently
-2. **If NOT available:** Show this message:
+2. **Check for Octocode:** Try to use `mcp__octocode__githubSearchRepositories` silently
+
+**If MCPs NOT available:** Show this message:
 
 ```
-⚠️ Context7 MCP not detected.
+⚠️ MCP servers not fully configured.
 
-MentorSpec uses Context7 to fetch official documentation for any library.
-This ensures you always learn from up-to-date, official sources.
+MentorSpec uses these MCPs to provide accurate, up-to-date guidance:
 
-To install (takes 30 seconds):
+📖 Context7 — Official documentation lookup
+🔍 Octocode — GitHub best practices search
+
+To install (takes 30 seconds each):
   claude mcp add --transport http context7 https://mcp.context7.com/mcp
-
-After installing, restart Claude Code and run /mentor-spec:init again.
 
 📖 Full setup guide: mentorspec/guides/context7-setup.md
 ```
@@ -66,7 +68,9 @@ Before asking questions, analyze the project silently:
    - Backend: Express, FastAPI, Go, Rust, etc.
    - Database: PostgreSQL, MongoDB, Prisma, etc.
 
-3. **Store detection results** — do NOT ask about stack unless it's a new/empty project.
+3. **Use Octocode for reference:** If building something similar to popular projects, note them for inspiration.
+
+4. **Store detection results** — do NOT ask about stack unless it's a new/empty project.
 
 ---
 
@@ -148,6 +152,11 @@ Options:
 4. Node.js/Express
 ```
 
+**Optional Octocode Research:**
+> "Let me check Octocode to find well-structured projects using [stack] for inspiration..."
+
+Use `githubSearchRepositories` to find reference projects.
+
 ---
 
 ### Phase 6: Generate Outputs
@@ -198,6 +207,10 @@ When these things work, the project is COMPLETE:
 
 [If detected: "These were already in your project."]
 [If chosen: Brief rationale for the stack choice]
+
+## Reference Projects (via Octocode)
+
+[List 1-2 well-structured GitHub repos using similar stack for reference]
 
 ## Key Files
 
@@ -260,6 +273,9 @@ Created:
 - mentorspec/product/roadmap.md
 
 Next step: Run /mentor-spec:feature to plan your first feature.
+
+Pro tip: Before starting work, run /mentor-spec:advise to gather
+intelligence from your learning registry and research tools.
 ```
 
 ---
@@ -271,6 +287,7 @@ Next step: Run /mentor-spec:feature to plan your first feature.
 3. **The Problem question is critical** — Push back if they describe features instead of problems.
 4. **Definition of Done prevents scope creep** — Hold them to what they defined.
 5. **Keep it conversational** — This is mentorship, not a form.
+6. **Use Octocode for reference** — Find well-structured projects for inspiration.
 
 ---
 

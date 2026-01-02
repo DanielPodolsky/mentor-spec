@@ -2,6 +2,7 @@
 
 # MentorSpec Project Installation Script
 # AI-Mentored Development for Juniors
+# Version 2.0 - Skill-Driven SDD Engine
 
 set -e
 
@@ -25,10 +26,10 @@ error() { echo -e "${RED}[ERROR]${NC} $1"; exit 1; }
 
 # Header
 echo ""
-echo -e "${GREEN}╔═══════════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║            MentorSpec Installation                    ║${NC}"
-echo -e "${GREEN}║      AI-Mentored Development for Juniors              ║${NC}"
-echo -e "${GREEN}╚═══════════════════════════════════════════════════════╝${NC}"
+echo -e "${GREEN}╔═══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║              MentorSpec Installation v2.0                 ║${NC}"
+echo -e "${GREEN}║       AI-Mentored Spec-Driven Development Engine          ║${NC}"
+echo -e "${GREEN}╚═══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
 # Check base exists
@@ -59,11 +60,39 @@ fi
 
 info "Creating directories..."
 
+# MentorSpec project directories
 mkdir -p "$PROJECT_DIR/mentorspec/product"
 mkdir -p "$PROJECT_DIR/mentorspec/specs/active"
 mkdir -p "$PROJECT_DIR/mentorspec/specs/completed"
 mkdir -p "$PROJECT_DIR/mentorspec/career/stories"
+mkdir -p "$PROJECT_DIR/mentorspec/guides"
+
+# Claude Code directories (v2.0 - Skill-Driven)
 mkdir -p "$PROJECT_DIR/.claude/commands/mentor-spec"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/frontend"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/backend"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/security"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/performance"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/error-handling"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/engineering"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/database"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/testing"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/seo"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/accessibility"
+mkdir -p "$PROJECT_DIR/.claude/skills/fundamentals/documentation"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/ownership"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/security"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/error"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/performance"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/fundamentals"
+mkdir -p "$PROJECT_DIR/.claude/skills/gates/testing"
+mkdir -p "$PROJECT_DIR/.claude/skills/career/star-stories"
+mkdir -p "$PROJECT_DIR/.claude/skills/career/resume-bullets"
+mkdir -p "$PROJECT_DIR/.claude/skills/learned"
+
+# Learning Flywheel directories
+mkdir -p "$PROJECT_DIR/learning/patterns"
+mkdir -p "$PROJECT_DIR/learning/failures"
 
 success "Directories created"
 
@@ -113,26 +142,122 @@ else
 fi
 
 # ============================================================================
-# STEP 4: Copy commands
+# STEP 4: Copy commands (v2.0 location)
 # ============================================================================
 
 info "Installing commands..."
 
-cp "$BASE_DIR/core/commands/"*.md "$PROJECT_DIR/.claude/commands/mentor-spec/" 2>/dev/null || true
-success "Commands installed"
+# Copy commands from .claude/commands/mentor-spec/
+cp "$BASE_DIR/.claude/commands/mentor-spec/"*.md "$PROJECT_DIR/.claude/commands/mentor-spec/" 2>/dev/null || true
+success "Commands installed (10 commands including test/docs)"
 
 # ============================================================================
-# STEP 5: Copy guides
+# STEP 5: Copy skills (NEW in v2.0)
+# ============================================================================
+
+info "Installing skills..."
+
+# Copy fundamentals
+if [ -d "$BASE_DIR/.claude/skills/fundamentals" ]; then
+    for skill in frontend backend security performance error-handling engineering database testing seo accessibility documentation; do
+        if [ -f "$BASE_DIR/.claude/skills/fundamentals/$skill/SKILL.md" ]; then
+            cp "$BASE_DIR/.claude/skills/fundamentals/$skill/SKILL.md" \
+               "$PROJECT_DIR/.claude/skills/fundamentals/$skill/"
+        fi
+    done
+    success "11 Core Fundamental skills installed"
+fi
+
+# Copy gates
+if [ -d "$BASE_DIR/.claude/skills/gates" ]; then
+    for gate in ownership security error performance fundamentals testing; do
+        if [ -f "$BASE_DIR/.claude/skills/gates/$gate/SKILL.md" ]; then
+            cp "$BASE_DIR/.claude/skills/gates/$gate/SKILL.md" \
+               "$PROJECT_DIR/.claude/skills/gates/$gate/"
+        fi
+    done
+    success "6 Mentorship Gate skills installed"
+fi
+
+# Copy career skills
+if [ -d "$BASE_DIR/.claude/skills/career" ]; then
+    for career in star-stories resume-bullets; do
+        if [ -f "$BASE_DIR/.claude/skills/career/$career/SKILL.md" ]; then
+            cp "$BASE_DIR/.claude/skills/career/$career/SKILL.md" \
+               "$PROJECT_DIR/.claude/skills/career/$career/"
+        fi
+    done
+    success "Career extraction skills installed"
+fi
+
+# Create .gitkeep for learned skills
+echo "# Auto-generated skills go here (from /retrospective)" > "$PROJECT_DIR/.claude/skills/learned/.gitkeep"
+
+# ============================================================================
+# STEP 6: Create Learning Registry (NEW in v2.0)
+# ============================================================================
+
+info "Creating Learning Registry..."
+
+if [ -f "$BASE_DIR/learning/LEARNING_REGISTRY.md" ]; then
+    cp "$BASE_DIR/learning/LEARNING_REGISTRY.md" "$PROJECT_DIR/learning/"
+else
+    cat > "$PROJECT_DIR/learning/LEARNING_REGISTRY.md" << 'EOF'
+# Learning Registry
+
+> Automatically updated by `/retrospective`. Query with `/advise`.
+> This file tracks your growth as an engineer across all sessions.
+
+---
+
+## Patterns (Reusable Solutions)
+
+Successful patterns you've discovered and can reuse:
+
+| Date | Domain | Pattern | Location |
+|------|--------|---------|----------|
+| | | *No patterns recorded yet* | |
+
+---
+
+## Failures (Anti-Patterns)
+
+Mistakes you've made and learned from (the most valuable learnings):
+
+| Date | Domain | Issue | Location |
+|------|--------|-------|----------|
+| | | *No failures documented yet* | |
+
+---
+
+## Competency Progression
+
+Track your growth over time:
+
+| Week | Level | Evidence |
+|------|-------|----------|
+| Start | ⭐ (learning) | Beginning MentorSpec journey |
+
+---
+
+## Detailed Entries
+
+*Entries will be added here chronologically as you complete `/retrospective` sessions.*
+EOF
+fi
+success "Learning Registry created"
+
+# ============================================================================
+# STEP 7: Copy guides
 # ============================================================================
 
 info "Copying guides..."
 
-mkdir -p "$PROJECT_DIR/mentorspec/guides"
 cp "$BASE_DIR/guides/"*.md "$PROJECT_DIR/mentorspec/guides/" 2>/dev/null || true
 success "Guides copied"
 
 # ============================================================================
-# STEP 6: Create product templates
+# STEP 8: Create product templates
 # ============================================================================
 
 info "Creating product templates..."
@@ -201,25 +326,56 @@ success "Product templates created"
 # ============================================================================
 
 echo ""
-echo -e "${GREEN}╔═══════════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║          Installation Complete!                       ║${NC}"
-echo -e "${GREEN}╚═══════════════════════════════════════════════════════╝${NC}"
+echo -e "${GREEN}╔═══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║            Installation Complete! v2.0                    ║${NC}"
+echo -e "${GREEN}╚═══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-success "MentorSpec installed successfully!"
+success "MentorSpec v2.0 installed successfully!"
 echo ""
 
 info "What was created:"
-echo "  mentorspec/           — Your project docs (commit this)"
-echo "  .claude/CLAUDE.md     — THE STRICTNESS (affects all Claude interactions)"
-echo "  .claude/commands/     — Slash commands"
+echo ""
+echo "  📁 mentorspec/              — Your project docs (commit this)"
+echo "     ├── product/             — Mission, stack, roadmap"
+echo "     ├── specs/               — Feature specifications"
+echo "     ├── career/              — Interview stories & bullets"
+echo "     └── guides/              — Setup guides"
+echo ""
+echo "  📁 .claude/                 — Claude Code configuration"
+echo "     ├── CLAUDE.md            — THE STRICTNESS (mentor behavior)"
+echo "     ├── commands/            — 10 slash commands"
+echo "     └── skills/              — Auto-invoked mentorship skills"
+echo "         ├── fundamentals/    — 11 Core review skills"
+echo "         ├── gates/           — 6 Mentorship gates"
+echo "         ├── career/          — STAR & resume extraction"
+echo "         └── learned/         — Auto-generated from /retrospective"
+echo ""
+echo "  📁 learning/                — Learning Flywheel data"
+echo "     ├── LEARNING_REGISTRY.md — Your growth tracker"
+echo "     ├── patterns/            — Reusable solutions"
+echo "     └── failures/            — Documented anti-patterns"
+echo ""
+
+info "New in v2.0:"
+echo "  • 6 Mentorship Gates in /done command (including Testing)"
+echo "  • /test command (guide through writing tests)"
+echo "  • /docs command (guide through writing documentation)"
+echo "  • /advise command (pre-work intelligence)"
+echo "  • /retrospective command (learning capture)"
+echo "  • Learning Flywheel that grows with you"
+echo "  • MCP integration (Context7 + Octocode)"
 echo ""
 
 info "Next steps:"
 echo "  1. Open Claude Code in this project"
 echo "  2. Run: /mentor-spec:init"
-echo "  3. Answer 3 questions about your project vision"
-echo "  4. Start building with AI mentorship!"
+echo "  3. Before each task: /mentor-spec:advise"
+echo "  4. After each task: /mentor-spec:done → /mentor-spec:retrospective"
+echo ""
+
+info "MCP Setup (recommended):"
+echo "  claude mcp add --transport http context7 https://mcp.context7.com/mcp"
 echo ""
 
 info "To remove MentorSpec later:"

@@ -9,7 +9,8 @@
 As a junior developer, one of the most important habits to build is **reading official documentation**.
 
 Context7 makes this easy by:
-- Fetching the **latest** docs for any library (React 19, not React 16)
+
+- Fetching the **latest** docs for any library (React 19 as of January 2026, not React 16)
 - Providing **version-specific** guidance
 - Eliminating outdated Stack Overflow answers
 
@@ -91,4 +92,4 @@ Try the local installation option if the remote server is slow.
 
 ---
 
-*Context7 is maintained by Upstash. Learn more at https://github.com/upstash/context7*
+_Context7 is maintained by Upstash. Learn more at https://github.com/upstash/context7_

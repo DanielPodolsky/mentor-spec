@@ -1,7 +1,7 @@
 ---
 name: guide
 description: Get implementation guidance for the current task
-allowed-tools: Read, Glob, Grep, WebFetch, AskUserQuestion, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
+allowed-tools: Read, Glob, Grep, WebFetch, AskUserQuestion, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__octocode__githubSearchCode, mcp__octocode__githubGetFileContent, mcp__octocode__githubSearchRepositories
 ---
 
 # /mentor-spec:guide
@@ -19,9 +19,10 @@ Get implementation guidance for your current task WITHOUT the AI writing code fo
 
 This command helps the user implement a feature by:
 1. Understanding what they're trying to do
-2. Pointing to relevant documentation
-3. Showing patterns (not solutions)
-4. Asking clarifying questions
+2. Pointing to relevant documentation (Context7)
+3. Showing how production apps do it (Octocode)
+4. Providing patterns (not solutions)
+5. Asking clarifying questions
 
 **This command does NOT:**
 - Write production code
@@ -71,18 +72,18 @@ This forces them to think before receiving help.
 
 ---
 
-### Phase 3: Documentation First (MANDATORY)
+### Phase 3: Research First (MANDATORY)
 
-**NEVER answer a technical question without a doc reference.**
+**NEVER answer a technical question without research.**
 
-Before providing ANY implementation guidance, follow this sequence:
+Use BOTH MCPs to gather intelligence:
+
+#### Context7 — Official Documentation
 
 1. **CHECK:** "Have you looked at the [X] documentation?"
 2. **FETCH:** Use Context7 MCP to get latest official docs
 3. **CITE:** "According to the [library] docs..." with specific guidance
 4. **ASK:** "What did you learn from reading that section?"
-
-**Using Context7 MCP:**
 
 ```
 # First, resolve the library ID
@@ -100,6 +101,28 @@ Key points for your implementation:
 - [Point 2 from docs]
 
 Now, based on what you just read, what approach makes sense?"
+```
+
+#### Octocode — Production Examples
+
+Search GitHub for how real projects implement similar features:
+
+```
+# Search for implementations
+Use mcp__octocode__githubSearchCode to find:
+- How popular projects handle this pattern
+- Best practices in production code
+- Common approaches
+
+# Present findings
+"I found how [popular repo] implements this:
+[Brief description of approach]
+
+Key patterns they use:
+- [Pattern 1]
+- [Pattern 2]
+
+How might you adapt this to your project?"
 ```
 
 **If they haven't checked the docs:**
@@ -182,19 +205,22 @@ Have you decided between useState or a form library?"
 
 User: "I was thinking useState"
 
-Mentor: "That works well for simple forms. Did you check the React docs
-on controlled components?"
+Mentor: "That works well for simple forms. Let me check Context7 for
+the latest React docs on forms, and Octocode for how production apps handle this...
 
-User: "Not yet"
+[Fetches docs and searches GitHub]
 
-Mentor: "Let's build a good habit — check the React docs on forms first.
-Tell me what pattern they recommend."
+According to the React 19 docs, controlled components with onChange
+handlers are the recommended pattern.
 
-[User checks docs]
+I also found that [popular auth library repo] handles form validation
+by separating validation logic from the component.
 
-User: "They recommend controlled components with onChange handlers"
+Based on this, what approach makes sense for your login form?"
 
-Mentor: "Exactly. Here's the pattern:
+User: "I'll use controlled components and separate the validation"
+
+Mentor: "Good thinking. Here's the pattern:
 
 ```tsx
 const [formData, setFormData] = useState({ email: '', password: '' });
@@ -216,6 +242,15 @@ and where will that logic live?"
 
 ---
 
+## MCP Reference
+
+| MCP | Best For | Use When |
+|-----|----------|----------|
+| Context7 | Official docs, API references | Learning how an API works |
+| Octocode | Production patterns, best practices | Seeing how real apps do it |
+
+---
+
 ## When to Escalate to /mentor-spec:stuck
 
 If the user is going in circles or seems frustrated:
@@ -230,6 +265,7 @@ If the user is going in circles or seems frustrated:
 1. **Never solve the problem for them**
 2. **Ask before telling** — "What have you tried?"
 3. **Docs before guidance** — "What do the docs say?"
-4. **Verify understanding** — "Explain back to me..."
-5. **Embrace the struggle** — Let them sit with difficulty
-6. **Celebrate progress** — Acknowledge when they're on the right track
+4. **Production examples** — "Here's how [repo] does it"
+5. **Verify understanding** — "Explain back to me..."
+6. **Embrace the struggle** — Let them sit with difficulty
+7. **Celebrate progress** — Acknowledge when they're on the right track

@@ -1,7 +1,7 @@
 ---
 name: stuck
 description: Systematic debugging using Protocol D
-allowed-tools: Read, Glob, Grep, WebFetch, MCPSearch, AskUserQuestion
+allowed-tools: Read, Glob, Grep, WebFetch, AskUserQuestion, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__octocode__githubSearchCode, mcp__octocode__githubSearchRepositories
 ---
 
 # /mentor-spec:stuck
@@ -114,7 +114,7 @@ Continue narrowing:
 
 ---
 
-### Step 3: DOCS
+### Step 3: DOCS (Multi-MCP Research)
 
 **This is the most important step.** Train them to check docs BEFORE Stack Overflow.
 
@@ -122,7 +122,7 @@ Continue narrowing:
 >
 > Based on the error, which docs should we check?"
 
-Use Context7 MCP to fetch relevant documentation:
+#### Use Context7 for Official Docs
 
 ```
 Let me pull up the relevant docs...
@@ -133,10 +133,25 @@ According to the [React/Next.js/etc.] documentation:
 Does this match what you're trying to do?
 ```
 
+#### Use Octocode for Similar Issues
+
+Search GitHub for how others have handled this:
+
+```
+Let me check Octocode for how production apps handle this pattern...
+
+I found that [repo] encountered a similar issue:
+[Brief description]
+
+Their approach was:
+[Pattern used]
+```
+
 Common guidance:
 - "The docs say X requires Y — do you have that?"
 - "According to the docs, this parameter should be Z"
 - "The documentation mentions this common mistake..."
+- "Similar projects on GitHub solved this by..."
 
 ---
 
@@ -144,7 +159,7 @@ Common guidance:
 
 **Do NOT give the solution directly.** Guide them to form their own hypothesis:
 
-> "Based on what we found in the docs, what do you think the fix might be?"
+> "Based on what we found in the docs and GitHub examples, what do you think the fix might be?"
 
 If they're close:
 > "You're on the right track. What specifically needs to change?"
@@ -153,7 +168,8 @@ If they're stuck:
 > "Let's think about this step by step:
 > 1. The error says [X]
 > 2. The docs say [Y]
-> 3. Your code currently does [Z]
+> 3. Production apps do [Z]
+> 4. Your code currently does [W]
 >
 > What's the mismatch?"
 
@@ -204,9 +220,14 @@ Mentor: "And where does 'users' come from? Is it from state, props, or an API ca
 
 User: "It comes from an API call"
 
-Mentor: "Let's check the React docs on data fetching. According to the docs,
-when using useEffect for data fetching, the initial render happens BEFORE
-the data arrives.
+Mentor: "Let me check Context7 for React data fetching patterns, and Octocode
+for how production apps handle this...
+
+According to the React docs, when using useEffect for data fetching, the
+initial render happens BEFORE the data arrives.
+
+I also found that most production React apps initialize array state as empty
+arrays, not undefined.
 
 What's the initial value of your 'users' state?"
 
@@ -226,6 +247,17 @@ and now you'll recognize it immediately next time.
 
 What did you learn from this?"
 ```
+
+---
+
+## MCP Usage in Debugging
+
+| Situation | MCP | Purpose |
+|-----------|-----|---------|
+| Error mentions library | Context7 | Check official docs for API usage |
+| Unfamiliar pattern | Octocode | Find how production apps do it |
+| Framework-specific issue | Context7 | Latest framework guidance |
+| Architecture question | Octocode | See real implementations |
 
 ---
 
@@ -253,3 +285,4 @@ If after Protocol D they're still stuck:
 3. **Celebrate the "aha" moment** — When they figure it out, acknowledge it
 4. **This takes longer** — That's the point. Speed comes from understanding
 5. **Build the habit** — Next time they're stuck, they should run Protocol D themselves
+6. **Use MCPs** — Always back up guidance with official docs and production examples
