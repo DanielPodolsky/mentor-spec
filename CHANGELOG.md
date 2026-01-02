@@ -61,8 +61,13 @@ Every completed task produces:
 ### Technical
 
 - Skills architecture with auto-invocation based on file patterns
-- MCP integration requirements (Context7 + Octocode)
 - Updated install scripts for new skill structure
+
+### MCP Integration
+
+Required for full functionality:
+- **Context7** — Official documentation lookup and citation
+- **Octocode** — GitHub code search for production patterns
 
 ---
 

@@ -21,12 +21,12 @@
 </p>
 
 <p align="center">
-  <a href="#-the-problem">Problem</a> •
-  <a href="#-why-not-just-learning-mode">Why Not Learning Mode?</a> •
-  <a href="#-how-it-works">How It Works</a> •
-  <a href="#-the-6-gates">6 Gates</a> •
-  <a href="#-installation">Install</a> •
-  <a href="#-commands">Commands</a>
+  <a href="#the-problem">Problem</a> •
+  <a href="#why-not-just-learning-mode">Why Not Learning Mode?</a> •
+  <a href="#the-6-gates">6 Gates</a> •
+  <a href="#installation">Install</a> •
+  <a href="#mcp-integration-recommended">MCPs</a> •
+  <a href="#commands">Commands</a>
 </p>
 
 ---
@@ -360,6 +360,35 @@ Open Claude Code in your project and run:
 ```
 
 **That's it.** Claude is now your mentor, not your coder.
+
+---
+
+## MCP Integration (Recommended)
+
+MentorSpec uses MCPs (Model Context Protocol) for enhanced mentorship:
+
+### Context7 — Documentation Lookup
+
+Before answering technical questions, the mentor fetches official docs and cites sources.
+
+```bash
+claude mcp add context7 --transport http https://mcp.context7.com/mcp
+```
+
+### Octocode — GitHub Code Search
+
+Search how production apps implement patterns. Learn from real code, not just theory.
+
+```bash
+claude mcp add octocode
+```
+
+| MCP | Purpose |
+|-----|---------|
+| **Context7** | "According to the React 19 docs..." — Official documentation |
+| **Octocode** | "Here's how Vercel implements this..." — Production patterns |
+
+> **Without MCPs:** MentorSpec still works, but operates at reduced effectiveness. The mentor can't verify answers against official docs or show real-world examples.
 
 ---
 
